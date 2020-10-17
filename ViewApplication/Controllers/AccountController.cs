@@ -85,6 +85,8 @@ namespace ViewApplication.Controllers
                 {
                     var httpClient = _httpClientFactory.CreateClient(Constants.ClientNoToken);
 
+                    var url = Constants.Routes.Token;
+
                     var response = await httpClient.PostAsJsonAsync<LoginModel, TokenModel>(Constants.Routes.Token, model);
 
                     if (response != null && response.Object != null)
@@ -104,7 +106,8 @@ namespace ViewApplication.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", response.ShortDescription);
+                        var desc = response.ShortDescription != null ? response.ShortDescription : "";
+                        ModelState.AddModelError("", desc);
                     }
                 }
                 catch (Exception ex)

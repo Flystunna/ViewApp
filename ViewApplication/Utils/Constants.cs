@@ -19,7 +19,7 @@ namespace ViewApplication.Utils
         }
         public class URL
         {
-            public const string Default = "/home/index";
+            public const string Default = "/cars/GetAllCars";
             public const string LoginPath = "/account/login";
             public const string AccessDeniedPath = "/error/accessdenied";
         }
@@ -80,7 +80,7 @@ namespace ViewApplication.Utils
             public const string GetAllCarManuacturer = "/api/CarManufacturers/GetCarManList";
 
             //Token
-            public const string Token = "/api/token";
+            public const string Token = "/api/token/auth";
             public const string RefreshToken = "/api/token/refreshtoken";
             
         }

@@ -22,6 +22,63 @@
     <link href="~/lib/sweetalert/sweetalert.css" rel="stylesheet" />
     <link href="~/lib/datepicker/css/datepicker.css" rel="stylesheet" />
     <style>
+         #preloader{
+             width:100%; 
+             height:100%; 
+             background:#EEE; 
+             left:0; 
+             top:0; 
+             position:fixed;
+             z-index:9999;
+         }
+        #preloader div{content:''; position:absolute; left:0; right:0;top:0; bottom:0; margin:auto; transform:skew(-12deg); width:15px; height:40px;background:#EFAA29; animation-name: animatepre2;animation-duration: 4s;animation-iteration-count:infinite;opacity:0;}
+        #preloader div:first-child{background:#019EC9;animation-name: animatepre1;transform:translateX(-16px) skew(-12deg); }
+        #preloader div:last-child{background:#022E64;animation-name: animatepre3;transform:translateX(16px) skew(-12deg); }
+
+       @@keyframes animatepre1 {
+            0% {opacity:0;}
+            25% {opacity:1;}
+            50% {opacity:1;}
+            100% {opacity:1;}
+        }
+
+        @@keyframes animatepre2 {
+            0% {opacity:0;}
+            25% {opacity:0;}
+            50% {opacity:1;}
+            100% {opacity:1;}
+        }
+
+        @@keyframes animatepre3 {
+            0% {opacity:0;}
+            25% {opacity:0;}
+            50% {opacity:0;}
+            100% {opacity:1;}
+        }
+        /* Paste this css to your style sheet file or under head tag */
+        /* This only works with JavaScript,
+if it's not present, don't show loader */
+        .no-js #loader {
+            display: none;
+        }
+
+        .js #loader {
+            display: block;
+            position: absolute;
+            left: 100px;
+            top: 0;
+        }
+
+        .se-pre-con {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url('@Url.Content("~/lib/loader/loader-128x/preloader_3.gif")') center no-repeat #fff;
+/*            background: url(https://smallenvelop.com/wp-content/uploads/2014/08/Preloader_11.gif) center no-repeat #fff;
+*/        }
         body{
             font-size:13px;
             background-color:azure;
@@ -32,6 +89,14 @@
     </style>
 </head>
 <body>
+    <!-- Paste this code after body tag -->
+    <div id="preloader">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    @*<div class="se-pre-con" style="background-color:black"></div>*@
+    <!-- Ends -->
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
             <div class="custom-menu">
@@ -189,6 +254,30 @@
     <script src="~/lib/pdfmake.js"></script>
     <script src="~/lib/jszip.min.js"></script>
     <script src="~/lib/select2/select2.js"></script>
+
+
+    @*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>*@
+    <script>
+        //paste this code under head tag or in a seperate js file.
+        // Wait for window load
+        //$(window).load(function () {
+        //    setTimeout(stopLoad, 1000);
+        //});
+
+        //function stopLoad() {
+        //    // Animate loader off screen
+        //    $(".se-pre-con").fadeOut("slow");
+        //}
+        jQuery(document).ready(function ($) {
+            setTimeout(function () {
+                $('#preloader').fadeOut("slow");
+            }, 500);
+
+            $(window).on('unload', function () {
+                $('#preloader').show();
+            });
+        });
+    </script>
     @RenderSection("Scripts", required: false)
     @RenderSection("Styles", required: false)
 </body>
